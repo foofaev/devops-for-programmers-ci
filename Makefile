@@ -16,7 +16,7 @@ build:
 	npm run build
 
 prepare:
-	cp -n .env.example .env || true
+	cp -n .env.ci .env || true
 
 start-backend-dev:
 	npx nodemon --exec node -r dotenv/config ./node_modules/@babel/node/bin/babel-node.js server/bin/server.js
