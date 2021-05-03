@@ -1,13 +1,6 @@
-# @TODO add tests with docker-compose
-test:
-	test -f Dockerfile
-	test -f docker-compose.yml
-
 ###################################################################################################
-# Local development
+# Local
 ###################################################################################################
-setup-and-start: setup start
-
 start:
 	npm run start
 
@@ -31,28 +24,24 @@ start-backend-dev:
 start-frontend-dev:
 	npx webpack serve
 
-lint-code:
+lint:
 	npx eslint .
 
-test-code:
+test:
 	npm test -s
 
 ###################################################################################################
-# Development using docker
+# Dev
 ###################################################################################################
-compose-dev:
+compose:
 	docker-compose -f docker-compose.dev.yml down -v
-	docker-compose -f docker-compose.dev.yml build
-	docker-compose -f docker-compose.dev.yml run backend make db-migrate
 	docker-compose -f docker-compose.dev.yml up -d
 
-compose-dev-up:
-	docker-compose -f docker-compose.dev.yml down
-	docker-compose -f docker-compose.dev.yml up -d
+compose-migrate:
+	docker-compose -f docker-compose.dev.yml -exec -T backend make db-migrate
 
-compose-dev-down:
+compose-down:
 	docker-compose -f docker-compose.dev.yml down
-	docker-compose -f docker-compose.dev.yml up -d
 
 compose-logs-backend:
 	docker-compose -f docker-compose.dev.yml logs --follow backend
@@ -63,33 +52,18 @@ compose-psql:
 	 docker-compose -f docker-compose.dev.yml exec hexlet-postgres psql hexlet -U hexlet_user
 
 ###################################################################################################
-# Production-like setup
+# CI
 ###################################################################################################
-compose:
-	docker-compose down -v
-	docker-compose -f docker-compose.yml up
+compose-ci: compose-ci-up compose-ci-setup
 
-compose-install:
-	docker-compose run app make build
+compose-ci-up:
+	docker-compose up -d
 
-compose-start:
-	docker-compose up --no-build --abort-on-container-exit
+compose-ci-setup:
+	docker-compose --exec -T app make setup
 
-compose-setup: compose-down compose-build compose-install
+compose-ci-lint:
+	docker-compose --exec -T app make lint
 
-compose-build:
-	docker-compose build
-
-compose-down:
-	docker-compose down -v || true
-
-compose-stop:
-	docker-compose stop || true
-
-compose-restart:
-	docker-compose restart
-
-compose-bash:
-	docker-compose run app bash
-
-.PHONY: setup test
+compose-ci-test:
+	docker-compose --exec -T app make test

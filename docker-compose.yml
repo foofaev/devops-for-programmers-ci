@@ -4,14 +4,13 @@ version: '3.8'
 services:
   app:
     build: .
-    env_file: ./.env
     depends_on:
       - hexlet-postgres
     networks:
       - hexlet-network
     ports:
       - 3000:3000
-    command: make setup-and-start
+    tty: true
 
   hexlet-postgres:
     env_file: ./.env

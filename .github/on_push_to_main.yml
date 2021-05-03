@@ -1,0 +1,19 @@
+name: Hexlet devops-for-programmers test CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build the stack
+        run: make compose-ci
+      - name: Lint
+        run: make compose-ci-lint
+      - name: Test
+        run: make command-ci-test
