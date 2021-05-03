@@ -1,0 +1,30 @@
+---
+version: '3.8'
+
+services:
+  app:
+    build: .
+    env_file: ./.env
+    depends_on:
+      - hexlet-postgres
+    networks:
+      - hexlet-network
+    ports:
+      - 3000:3000
+    command: make setup-and-start
+
+  hexlet-postgres:
+    env_file: ./.env
+    image: postgres:12.3-alpine
+    ports:
+      - 5432
+    volumes:
+      - hexlet-postgres-prod-volume:/var/lib/postgresql/data
+    networks:
+      - hexlet-network
+
+networks:
+  hexlet-network:
+
+volumes:
+  hexlet-postgres-prod-volume:

@@ -1,0 +1,42 @@
+---
+version: '3.8'
+
+x-app-base:
+  &app-base
+  build: .
+  env_file: ./.env
+  volumes:
+    - /srv/project/node_modules
+    - ./:/srv/project
+  depends_on:
+    - hexlet-postgres
+  networks:
+    - hexlet-dev-network
+
+services:
+  backend:
+    << : *app-base
+    ports:
+      - 3000:3000
+    command: make start-backend-dev
+
+  frontend:
+    << : *app-base
+    ports:
+      - 5000:5000
+    command: make start-frontend-dev
+
+  hexlet-postgres:
+    env_file: ./.env
+    image: postgres:12.3-alpine
+    ports:
+      - 5432
+    volumes:
+      - hexlet-postgres-dev-volume:/var/lib/postgresql/data
+    networks:
+      - hexlet-dev-network
+
+networks:
+  hexlet-dev-network:
+volumes:
+  hexlet-postgres-dev-volume:

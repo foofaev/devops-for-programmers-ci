@@ -1,0 +1,30 @@
+---
+
+root: true
+
+extends:
+  - 'airbnb-base'
+  - 'plugin:jest/recommended'
+
+parser: babel-eslint
+
+env:
+  browser: true
+  node: true
+  jest: true
+
+rules:
+  new-cap:
+    - error
+    - properties: false
+  no-shadow:
+    - error
+    - allow:
+      - error
+      - callback
+  no-param-reassign:
+    - error
+    - props: true
+      ignorePropertyModificationsFor:
+      - req
+      - reply
