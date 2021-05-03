@@ -16,4 +16,4 @@ jobs:
       - name: Lint
         run: make compose-ci-lint
       - name: Test
-        run: make command-ci-test
+        run: make compose-ci-test
