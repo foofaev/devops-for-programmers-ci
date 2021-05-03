@@ -60,10 +60,10 @@ compose-ci-up:
 	docker-compose up -d
 
 compose-ci-setup:
-	docker-compose --exec -T app make setup
+	docker-compose exec -T app make setup
 
 compose-ci-lint:
-	docker-compose --exec -T app make lint
+	docker-compose exec -T app make lint
 
 compose-ci-test:
-	docker-compose --exec -T app make test
+	docker-compose exec -T app make test

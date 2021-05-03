@@ -14,14 +14,10 @@ env:
   jest: true
 
 rules:
+  import/extensions: 0
   new-cap:
     - error
     - properties: false
-  no-shadow:
-    - error
-    - allow:
-      - error
-      - callback
   no-param-reassign:
     - error
     - props: true

@@ -18,7 +18,7 @@ const settings = {
   },
   pool: {
     afterCreate(connection, done) {
-      connection.query('SET timezone=\'UTC\';', error => done(error, connection));
+      connection.query('SET timezone=\'UTC\';', (error) => done(error, connection));
     },
   },
   useNullAsDefault: true,
