@@ -15,7 +15,7 @@ services:
 
   hexlet-postgres:
     env_file: ./.env.ci
-    image: postgres:12.3-alpine
+    image: postgres:13.2-alpine
     ports:
       - 5432
     volumes:
