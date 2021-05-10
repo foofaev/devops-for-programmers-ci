@@ -2,8 +2,8 @@
 
 import getApp from '..';
 
-const port = process.env.SERVER_PORT || 3000;
-const address = process.env.SERVER_ADDRESS || '127.0.0.1';
+const port = process.env.PORT || 3000;
+const address = process.env.ADDRESS || '127.0.0.1';
 
 getApp().listen(port, address, (error, builtAddress) => {
   if (error) {
