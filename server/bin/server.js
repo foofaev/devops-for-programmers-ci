@@ -3,7 +3,7 @@
 import getApp from '..';
 
 const port = process.env.PORT || 3000;
-const address = process.env.ADDRESS || '127.0.0.1';
+const address = process.env.ADDRESS || '0.0.0.0';
 
 getApp().listen(port, address, (error, builtAddress) => {
   if (error) {
