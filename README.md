@@ -10,3 +10,5 @@ A stub repository to exercise CI knowledge
 
 
 Результатом выполнения упражнения будет проект с подключенным GitHub Actions. А когда вы будете отправлять задание на проверку, то укажите в issue ссылку на задеплоенное приложение.
+
+[Ссылка на поднятный проект](https://foofaev-devops-ci.herokuapp.com/)
