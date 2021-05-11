@@ -6,13 +6,13 @@ const migrations = {
   directory: path.join(__dirname, 'server', 'migrations'),
 };
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isConnectionStringExists = !!process.env.DATABASE_URL;
 
 const settings = {
   client: 'pg',
   version: '13',
   asyncStackTraces: true,
-  connection: isProduction
+  connection: isConnectionStringExists
     ? {
       connectionString: process.env.DATABASE_URL,
       ssl: { rejectUnauthorized: false },

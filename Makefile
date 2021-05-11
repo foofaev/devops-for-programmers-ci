@@ -34,11 +34,12 @@ test:
 # Dev
 ###################################################################################################
 compose:
+	cp -n .env.ci .env || true
 	docker-compose -f docker-compose.dev.yml down -v
 	docker-compose -f docker-compose.dev.yml up -d
 
 compose-migrate:
-	docker-compose -f docker-compose.dev.yml -exec -T backend make db-migrate
+	docker-compose -f docker-compose.dev.yml exec -T backend make db-migrate
 
 compose-down:
 	docker-compose -f docker-compose.dev.yml down
@@ -50,6 +51,9 @@ compose-logs-frontend:
 
 compose-psql:
 	 docker-compose -f docker-compose.dev.yml exec hexlet-postgres psql hexlet -U hexlet_user
+
+compose-bash:
+	 docker-compose -f docker-compose.dev.yml exec backend bash
 
 ###################################################################################################
 # CI
